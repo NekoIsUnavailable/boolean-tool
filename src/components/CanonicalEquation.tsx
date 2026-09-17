@@ -32,13 +32,13 @@ export function CanonicalEquation({
   const varList = varNames.slice(0, numVars).join(', ');
   
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+    <div className="bg-white rounded-xl shadow-sm border border-slate-200">
       <div className="px-5 py-3 border-b border-slate-100 bg-slate-50 flex justify-between items-center">
         <h3 className="font-semibold text-slate-800 flex items-center gap-2">
           Complete Equation
         </h3>
       </div>
-      <div className="p-5 overflow-x-auto flex justify-center py-8">
+      <div className="p-5 overflow-x-auto py-8">
         <div className="flex items-center gap-1.5 text-xl sm:text-2xl whitespace-nowrap" style={{ fontFamily: '"Cambria Math", "Times New Roman", serif' }}>
           <span className="italic">{funcName}</span>
           <span>({varList})</span>

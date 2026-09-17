@@ -1,4 +1,3 @@
-import React from 'react';
 import type { OutputState } from '../types';
 
 interface CanonicalEquationProps {

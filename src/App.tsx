@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo, useRef } from 'react';
 import { ConfigBar } from './components/ConfigBar';
 import { ProblemInput } from './components/ProblemInput';
 import { TermBuilder } from './components/TermBuilder';
+import { CanonicalEquation } from './components/CanonicalEquation';
 import { TruthTable } from './components/TruthTable';
 import { KarnaughMap } from './components/KarnaughMap';
 import { MinimizedEquation } from './components/MinimizedEquation';
@@ -342,6 +343,14 @@ function App() {
           </div>
           
           <div className="space-y-6">
+            <CanonicalEquation
+              numVars={numVars}
+              varNames={varNames}
+              mintermVector={mintermVector}
+              canonicalMode={canonicalMode}
+              funcName={funcName}
+            />
+
             <KarnaughMap
               numVars={numVars}
               varNames={varNames}

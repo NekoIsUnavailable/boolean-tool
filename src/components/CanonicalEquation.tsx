@@ -39,7 +39,7 @@ export function CanonicalEquation({
         </h3>
       </div>
       <div className="p-5 overflow-x-auto py-8">
-        <div className="flex items-center gap-1.5 text-xl sm:text-2xl whitespace-nowrap" style={{ fontFamily: '"Cambria Math", "Times New Roman", serif' }}>
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-4 text-xl sm:text-2xl" style={{ fontFamily: '"Cambria Math", "Times New Roman", serif' }}>
           <span className="italic">{funcName}</span>
           <span>({varList})</span>
           <span className="mx-1">=</span>

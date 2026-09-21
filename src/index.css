@@ -8,4 +8,43 @@
 body {
   background-color: #f8fafc;
   color: #0f172a;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Elegant Scrollbars for Data Containers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1; 
+  border-radius: 10px;
+  border: 2px solid #f8fafc; /* Adds padding feel inside the container */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #94a3b8; 
+}
+
+/* Specific styling for internal overflow boxes to feel more mobile-native */
+.overflow-x-auto {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* Soft drop shadows for cards to feel elevated and modern */
+.card-shadow {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+/* Beautiful transitions for interactive elements */
+button, input, select {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }

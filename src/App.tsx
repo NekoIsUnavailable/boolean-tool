@@ -7,6 +7,7 @@ import { TruthTable } from './components/TruthTable';
 import { KarnaughMap } from './components/KarnaughMap';
 import { MinimizedEquation } from './components/MinimizedEquation';
 import { LogicGateSchematic } from './components/LogicGateSchematic';
+import { TabularMethod } from './components/TabularMethod';
 import type { OutputState, Term } from './types';
 import { getVarName } from './lib/utils';
 import { quineMcCluskey } from './lib/quineMcCluskey';
@@ -371,6 +372,12 @@ function App() {
             />
           </div>
         </div>
+
+        <TabularMethod
+          numVars={numVars}
+          varNames={varNames}
+          mintermVector={mintermVector}
+        />
 
         <LogicGateSchematic
           numVars={numVars}

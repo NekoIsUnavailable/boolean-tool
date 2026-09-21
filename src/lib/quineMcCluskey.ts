@@ -4,9 +4,42 @@ export interface Implicant {
   used: boolean;
 }
 
+export interface QmStepTable {
+  cubes: number; // 0 for 0-cubes, 1 for 1-cubes
+  groups: Implicant[][];
+}
+
+export interface QmResult {
+  stepTables: QmStepTable[];
+  primeImplicants: Implicant[];
+  piChart: { minterm: number; piIndices: number[] }[];
+  essentialPIs: number[];
+  finalEquationPIs: string[];
+}
+
 export function quineMcCluskey(minterms: number[], dontCares: number[], numVars: number): string[] {
-  if (minterms.length === 0) return [];
-  if (minterms.length + dontCares.length === Math.pow(2, numVars)) return ["-".repeat(numVars)];
+  return getQuineMcCluskeySteps(minterms, dontCares, numVars).finalEquationPIs;
+}
+
+export function getQuineMcCluskeySteps(minterms: number[], dontCares: number[], numVars: number): QmResult {
+  if (minterms.length === 0) {
+    return {
+      stepTables: [],
+      primeImplicants: [],
+      piChart: [],
+      essentialPIs: [],
+      finalEquationPIs: []
+    };
+  }
+  if (minterms.length + dontCares.length === Math.pow(2, numVars)) {
+    return {
+      stepTables: [],
+      primeImplicants: [{ term: "-".repeat(numVars), minterms: [...minterms, ...dontCares], used: false }],
+      piChart: [],
+      essentialPIs: [0],
+      finalEquationPIs: ["-".repeat(numVars)]
+    };
+  }
   
   let groups: Implicant[][] = Array.from({ length: numVars + 1 }, () => []);
   const allTerms = [...minterms, ...dontCares];
@@ -18,6 +51,8 @@ export function quineMcCluskey(minterms: number[], dontCares: number[], numVars:
   }
   
   const primeImplicants: Implicant[] = [];
+  const stepTables: QmStepTable[] = [];
+  let cubeLevel = 0;
   
   while (groups.some(g => g.length > 0)) {
     const nextGroups: Implicant[][] = Array.from({ length: numVars + 1 }, () => []);
@@ -42,18 +77,36 @@ export function quineMcCluskey(minterms: number[], dontCares: number[], numVars:
       }
     }
     
+    // Save current step table (deep copy to capture 'used' state)
+    // Only save if this level had any terms
+    if (groups.some(g => g.length > 0)) {
+      stepTables.push({
+        cubes: cubeLevel,
+        groups: groups.map(g => g.map(t => ({ ...t, minterms: [...t.minterms] })))
+      });
+    }
+    
     for (const group of groups) {
       for (const t of group) {
         if (!t.used && !primeImplicants.some(pi => pi.term === t.term)) {
-          primeImplicants.push(t);
+          primeImplicants.push({ ...t, minterms: [...t.minterms] });
         }
       }
     }
     
     groups = nextGroups;
+    cubeLevel++;
   }
   
-  return petricksMethod(primeImplicants, minterms);
+  const { finalEquationPIs, piChart, essentialPIs } = petricksMethodWithDetails(primeImplicants, minterms);
+  
+  return {
+    stepTables,
+    primeImplicants,
+    piChart,
+    essentialPIs,
+    finalEquationPIs
+  };
 }
 
 function getDiffIndex(t1: string, t2: string): number {
@@ -68,12 +121,16 @@ function getDiffIndex(t1: string, t2: string): number {
   return diffs === 1 ? idx : -1;
 }
 
-function petricksMethod(primeImplicants: Implicant[], minterms: number[]): string[] {
-  if (minterms.length === 0) return [];
+function petricksMethodWithDetails(primeImplicants: Implicant[], minterms: number[]) {
+  if (minterms.length === 0) return { finalEquationPIs: [], piChart: [], essentialPIs: [] };
 
   const chart = new Map<number, number[]>();
+  const piChartData: { minterm: number; piIndices: number[] }[] = [];
+  
   minterms.forEach(m => {
-    chart.set(m, primeImplicants.map((pi, idx) => pi.minterms.includes(m) ? idx : -1).filter(idx => idx !== -1));
+    const pis = primeImplicants.map((pi, idx) => pi.minterms.includes(m) ? idx : -1).filter(idx => idx !== -1);
+    chart.set(m, pis);
+    piChartData.push({ minterm: m, piIndices: pis });
   });
 
   const essentialPIs: number[] = [];
@@ -100,7 +157,11 @@ function petricksMethod(primeImplicants: Implicant[], minterms: number[]): strin
   }
 
   if (uncoveredMinterms.size === 0) {
-    return essentialPIs.map(idx => primeImplicants[idx].term);
+    return {
+      finalEquationPIs: essentialPIs.map(idx => primeImplicants[idx].term),
+      piChart: piChartData,
+      essentialPIs
+    };
   }
 
   const remainingMinterms = Array.from(uncoveredMinterms);
@@ -150,5 +211,9 @@ function petricksMethod(primeImplicants: Implicant[], minterms: number[]): strin
     }
   }
 
-  return [...essentialPIs, ...bestPiCombo].map(idx => primeImplicants[idx].term);
+  return {
+    finalEquationPIs: [...essentialPIs, ...bestPiCombo].map(idx => primeImplicants[idx].term),
+    piChart: piChartData,
+    essentialPIs
+  };
 }

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { OutputState } from '../types';
 import { cn } from '../lib/utils';
+import { ArrowRightLeft } from 'lucide-react';
 
 interface KarnaughMapProps {
   numVars: 2 | 3 | 4 | 5 | 6;
@@ -38,13 +39,22 @@ export const KarnaughMap: React.FC<KarnaughMapProps> = ({
   hoveredTermIndex,
   setHoveredTermIndex
 }) => {
+  const [swapAxes, setSwapAxes] = useState(false);
+
   let numCols = 4;
   let numRows = 4;
-  if (numVars === 2) { numCols = 2; numRows = 2; }
-  else if (numVars === 3) { numCols = 4; numRows = 2; }
-  else if (numVars === 4) { numCols = 4; numRows = 4; }
-  else if (numVars === 5) { numCols = 8; numRows = 4; }
-  else if (numVars === 6) { numCols = 8; numRows = 8; }
+  if (numVars === 2) { 
+    numCols = 2; numRows = 2; 
+  } else if (numVars === 3) { 
+    numCols = swapAxes ? 2 : 4; 
+    numRows = swapAxes ? 4 : 2; 
+  } else if (numVars === 4) { 
+    numCols = 4; numRows = 4; 
+  } else if (numVars === 5) { 
+    numCols = 8; numRows = 4; 
+  } else if (numVars === 6) { 
+    numCols = 8; numRows = 8; 
+  }
 
   const gray1 = [0, 1];
   const gray2 = [0, 1, 3, 2];
@@ -55,21 +65,31 @@ export const KarnaughMap: React.FC<KarnaughMapProps> = ({
     for (let c = 0; c < numCols; c++) {
       let minterm = 0;
       if (numVars === 2) {
-        minterm = (gray1[r] << 1) | gray1[c];
+        const rVal = swapAxes ? gray1[c] : gray1[r];
+        const cVal = swapAxes ? gray1[r] : gray1[c];
+        minterm = (rVal << 1) | cVal;
       } else if (numVars === 3) {
-        minterm = (gray1[r] << 2) | gray2[c];
+        const A = swapAxes ? gray1[c] : gray1[r];
+        const BC = swapAxes ? gray2[r] : gray2[c];
+        minterm = (A << 2) | BC;
       } else if (numVars === 4) {
-        minterm = (gray2[r] << 2) | gray2[c];
+        const AB = swapAxes ? gray2[c] : gray2[r];
+        const CD = swapAxes ? gray2[r] : gray2[c];
+        minterm = (AB << 2) | CD;
       } else if (numVars === 5) {
         const A = c < 4 ? 0 : 1;
-        const BC = gray2[c % 4];
-        const DE = gray2[r];
+        const innerC = c % 4;
+        const innerR = r;
+        const BC = swapAxes ? gray2[innerR] : gray2[innerC];
+        const DE = swapAxes ? gray2[innerC] : gray2[innerR];
         minterm = (A << 4) | (BC << 2) | DE;
       } else if (numVars === 6) {
         const A = r < 4 ? 0 : 1;
         const B = c < 4 ? 0 : 1;
-        const CD = gray2[c % 4];
-        const EF = gray2[r % 4];
+        const innerC = c % 4;
+        const innerR = r % 4;
+        const CD = swapAxes ? gray2[innerR] : gray2[innerC];
+        const EF = swapAxes ? gray2[innerC] : gray2[innerR];
         minterm = (A << 5) | (B << 4) | (CD << 2) | EF;
       }
       rowGroup.push(minterm);
@@ -89,19 +109,37 @@ export const KarnaughMap: React.FC<KarnaughMapProps> = ({
   const showTopQuadrants = numVars >= 5;
   const showSideQuadrants = numVars === 6;
 
-  // For 5/6 vars, subgrids are 4x4.
-  const innerColLabels = numVars >= 3 ? ['00', '01', '11', '10'] : ['0', '1'];
-  const innerRowLabels = numVars >= 4 ? ['00', '01', '11', '10'] : ['0', '1'];
+  let cornerLabel = '';
+  if (numVars === 2) {
+    cornerLabel = swapAxes ? `${vNames[1]} \\ ${vNames[0]}` : `${vNames[0]} \\ ${vNames[1]}`;
+  } else if (numVars === 3) {
+    cornerLabel = swapAxes ? `${vNames[1]}${vNames[2]} \\ ${vNames[0]}` : `${vNames[0]} \\ ${vNames[1]}${vNames[2]}`;
+  } else if (numVars === 4) {
+    cornerLabel = swapAxes ? `${vNames[2]}${vNames[3]} \\ ${vNames[0]}${vNames[1]}` : `${vNames[0]}${vNames[1]} \\ ${vNames[2]}${vNames[3]}`;
+  } else if (numVars === 5) {
+    cornerLabel = swapAxes ? `${vNames[1]}${vNames[2]} \\ ${vNames[3]}${vNames[4]}` : `${vNames[3]}${vNames[4]} \\ ${vNames[1]}${vNames[2]}`;
+  } else if (numVars === 6) {
+    cornerLabel = swapAxes ? `${vNames[2]}${vNames[3]} \\ ${vNames[4]}${vNames[5]}` : `${vNames[4]}${vNames[5]} \\ ${vNames[2]}${vNames[3]}`;
+  }
 
-  const cornerLabel = numVars === 2 ? `${vNames[0]} \\ ${vNames[1]}` :
-                      numVars === 3 ? `${vNames[0]} \\ ${vNames[1]}${vNames[2]}` :
-                      numVars === 4 ? `${vNames[0]}${vNames[1]} \\ ${vNames[2]}${vNames[3]}` :
-                      numVars === 5 ? `${vNames[3]}${vNames[4]} \\ ${vNames[1]}${vNames[2]}` :
-                      `${vNames[4]}${vNames[5]} \\ ${vNames[2]}${vNames[3]}`;
+  const colBits = (numVars === 2 || (numVars === 3 && swapAxes)) ? 1 : 2;
+  const rowBits = (numVars === 2 || (numVars === 3 && !swapAxes)) ? 1 : 2;
+  
+  const innerColLabels = colBits === 1 ? ['0', '1'] : ['00', '01', '11', '10'];
+  const innerRowLabels = rowBits === 1 ? ['0', '1'] : ['00', '01', '11', '10'];
 
   return (
     <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-      <h2 className="text-lg font-semibold mb-6">Karnaugh Map</h2>
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-lg font-semibold">Karnaugh Map</h2>
+        <button 
+           onClick={() => setSwapAxes(!swapAxes)}
+           className="text-sm px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-md flex items-center gap-2 transition-colors"
+           title="Swap Rows and Columns"
+        >
+          <ArrowRightLeft className="w-4 h-4" /> Swap Axes
+        </button>
+      </div>
       <div className="flex justify-center overflow-x-auto pb-4">
         <table className="border-collapse">
           <thead>

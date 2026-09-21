@@ -271,7 +271,7 @@ function App() {
       <div className="max-w-6xl mx-auto space-y-6 sm:space-y-8">
         <header className="mb-6 sm:mb-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-200/60">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500 tracking-tight">Boolean Minimizer</h1>
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500 tracking-tight">Rene Baterboolean</h1>
             <p className="text-slate-500 mt-1 font-medium">Visual Logic Simplification</p>
           </div>
           <div className="flex gap-3 w-full sm:w-auto">

@@ -12,9 +12,9 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg'],
       manifest: {
-        name: 'Boolean Minimizer Pro',
-        short_name: 'Minimizer',
-        description: 'Visual Logic Simplification & Karnaugh Mapping',
+        name: 'Rene Baterboolean',
+        short_name: 'Baterboolean',
+        description: 'Visual Boolean Logic Simplifier & Karnaugh Mapping',
         theme_color: '#ffffff',
         background_color: '#f8fafc', // slate-50
         display: 'standalone',

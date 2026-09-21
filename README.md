@@ -1,37 +1,44 @@
-# React + TypeScript + Vite
+# Rene Baterboolean 🧮
 
-OY YAWA NARA LINK SA WEBSITE HAHA
-https://boolean67tung.vercel.app/
-https://boolean67tung.vercel.app/
+A modern, beautiful, and mobile-friendly Boolean Logic Minimizer built with React, Vite, and Tailwind CSS.
 
-I'll add Tabular method later or if someone can do it then thats fire ako na bahala push sa website
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+## 🚀 Features
 
-Currently, two official plugins are available:
+* **Visual Karnaugh Maps (Up to 6 Variables):** Automatically generated K-Maps with interactive cells and prime implicant group highlighting.
+* **Tabular Method (Quine-McCluskey):** Generates step-by-step tables showing term merges and the Prime Implicant Covering Chart, perfect for students checking their homework!
+* **Truth Table Editor:** Quickly toggle outputs for minterms (`1`) and don't-cares (`X`).
+* **Logic Gate Schematic:** Automatically visualizes the minimized boolean equation into a standard logic gate circuit (AND, OR, NOT).
+* **Multiple Notations:** Supports both Sum of Products (SOP) and Product of Sums (POS).
+* **PWA Ready:** Installable as a native standalone app on iOS, Android, and Desktop.
+* **History Tracking:** Automatically saves your recent problems locally.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🌐 Live Demo
+Try it live: [https://boolean67tung.vercel.app/](https://boolean67tung.vercel.app/)
 
-## React Compiler
+## 🛠️ Tech Stack
+* React 19
+* TypeScript
+* Tailwind CSS 4
+* Vite 8
+* Lucide React
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 💻 Local Development
 
-## Expanding the Oxlint configuration
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/NekoIsUnavailable/boolean-tool.git
+   cd boolean-tool
+   ```
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## 📝 License
+MIT License

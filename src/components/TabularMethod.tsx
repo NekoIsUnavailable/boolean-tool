@@ -30,6 +30,17 @@ export const TabularMethod: React.FC<TabularMethodProps> = ({ numVars, mintermVe
     );
   }
 
+  const getDiffs = (termStr: string) => {
+    const diffs: number[] = [];
+    for (let i = 0; i < termStr.length; i++) {
+      if (termStr[i] === '-') {
+        diffs.push(Math.pow(2, termStr.length - 1 - i));
+      }
+    }
+    diffs.sort((a,b) => a-b);
+    return diffs.length > 0 ? `(${diffs.join(',')})` : '';
+  };
+
   return (
     <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 overflow-hidden">
       <h2 className="text-lg font-semibold mb-6">Quine-McCluskey Tabular Method</h2>
@@ -47,8 +58,8 @@ export const TabularMethod: React.FC<TabularMethodProps> = ({ numVars, mintermVe
               </div>
               <div className="flex">
                 <div className="p-2 border-r border-slate-300 font-semibold bg-slate-50 w-12 text-center"># 1s</div>
-                <div className="p-2 border-r border-slate-300 font-semibold bg-slate-50 w-40">Minterms</div>
-                <div className="p-2 font-semibold bg-slate-50 w-32">Binary</div>
+                <div className="p-2 border-r border-slate-300 font-semibold bg-slate-50 min-w-[12rem]">Minterms (Diffs)</div>
+                <div className="p-2 font-semibold bg-slate-50 w-24">Binary</div>
               </div>
               
               {step.groups.map((group, gIdx) => {
@@ -56,7 +67,7 @@ export const TabularMethod: React.FC<TabularMethodProps> = ({ numVars, mintermVe
                 return (
                   <React.Fragment key={gIdx}>
                     {group.map((term, tIdx) => (
-                      <div key={tIdx} className={`flex border-t border-slate-200 ${term.used ? 'text-slate-500' : 'font-semibold text-blue-700'}`}>
+                      <div key={tIdx} className={`flex border-t border-slate-200 ${term.used ? 'text-slate-700' : 'font-semibold text-blue-700 bg-blue-50/30'}`}>
                         {tIdx === 0 ? (
                           <div className="p-2 border-r border-slate-300 w-12 text-center font-semibold text-slate-600 flex items-center justify-center">
                             {gIdx}
@@ -64,15 +75,19 @@ export const TabularMethod: React.FC<TabularMethodProps> = ({ numVars, mintermVe
                         ) : (
                           <div className="p-2 border-r border-slate-300 w-12"></div>
                         )}
-                        <div className="p-2 border-r border-slate-300 w-40 text-sm flex items-center justify-between pr-4">
-                          <span>{term.minterms.join(', ')}</span>
+                        <div className="p-2 border-r border-slate-300 min-w-[12rem] text-sm flex items-center justify-between pr-4 gap-4">
+                          <span>
+                            {term.minterms.join(',')} <span className="text-slate-400 font-mono text-xs">{getDiffs(term.term)}</span>
+                          </span>
                           {term.used ? (
-                            <span className="text-xs font-bold text-slate-400">✓</span>
+                            <span className="text-xs font-bold text-slate-400 flex items-center">
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
+                            </span>
                           ) : (
                             <span className="text-xs font-bold text-red-500">*PI</span>
                           )}
                         </div>
-                        <div className="p-2 w-32 font-mono text-sm flex items-center">
+                        <div className="p-2 w-24 font-mono text-sm flex items-center tracking-widest">
                           {term.term}
                         </div>
                       </div>
@@ -112,13 +127,17 @@ export const TabularMethod: React.FC<TabularMethodProps> = ({ numVars, mintermVe
                       {String.fromCharCode(97 + pIdx)} {isEssential ? <span className="text-red-500">*</span> : ''}
                     </td>
                     <td className="border border-slate-300 p-2 text-xs">
-                      {pi.minterms.join(', ')}
+                      {pi.minterms.join(', ')} <span className="text-slate-400 font-mono text-xs ml-1">{getDiffs(pi.term)}</span>
                     </td>
                     {steps.piChart.map(m => {
                       const covers = m.piIndices.includes(pIdx);
                       return (
                         <td key={m.minterm} className="border border-slate-300 p-2 text-center">
-                          {covers && <span className="text-blue-600 font-bold">✓</span>}
+                          {covers && (
+                            <div className="flex justify-center">
+                              <svg className={`w-4 h-4 ${isEssential ? "text-blue-600" : "text-slate-600"}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                          )}
                         </td>
                       );
                     })}
@@ -130,7 +149,10 @@ export const TabularMethod: React.FC<TabularMethodProps> = ({ numVars, mintermVe
           <div className="mt-4 text-sm text-slate-600 flex flex-col gap-1">
             <p><span className="text-red-500 font-bold">*</span> Indicates an Essential Prime Implicant.</p>
             <p><span className="font-bold text-red-500">*PI</span> in the tables indicates an uncombined term (a Prime Implicant).</p>
-            <p><span className="text-slate-400 font-bold">✓</span> in the tables indicates the term was successfully combined.</p>
+            <p className="flex items-center gap-1">
+              <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
+              in the tables indicates the term was successfully combined.
+            </p>
             <p>Highlighted blue rows in the chart are the Prime Implicants selected for the final minimized equation.</p>
           </div>
         </div>

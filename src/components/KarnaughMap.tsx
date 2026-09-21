@@ -192,7 +192,7 @@ export const KarnaughMap: React.FC<KarnaughMapProps> = ({
                     {innerRowLabels[rIdx % 4]}
                   </th>
                   {row.map((minterm, cIdx) => {
-                    const state = mintermVector[minterm] || (canonicalMode === 'SOP' ? '0' : '1');
+                    const state = mintermVector[minterm] || '0';
                     
                     const coveringPIs = primeImplicants
                       .map((pi, idx) => termCovers(pi, minterm, numVars) ? idx : -1)

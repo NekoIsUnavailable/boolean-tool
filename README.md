@@ -1,5 +1,10 @@
 # React + TypeScript + Vite
 
+OY YAWA NARA LINK SA WEBSITE HAHA
+https://boolean67tung.vercel.app/
+https://boolean67tung.vercel.app/
+
+I'll add Tabular method later or if someone can do it then thats fire ako na bahala push sa website
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
 Currently, two official plugins are available:

@@ -201,6 +201,33 @@ function App() {
     });
   };
 
+  const handleNumVarsChange = (newNumVars: 2 | 3 | 4 | 5 | 6) => {
+    setNumVars(newNumVars);
+    
+    // Cleanup minterm and don't care inputs so they don't force it back up
+    const maxAllowed = Math.pow(2, newNumVars) - 1;
+    
+    setMainTermInputs(prev => {
+      const filtered = prev.filter(s => {
+        if (s === '') return true;
+        const n = parseInt(s);
+        return !isNaN(n) && n <= maxAllowed;
+      });
+      if (filtered.length === 0 || filtered[filtered.length - 1] !== '') filtered.push('');
+      return filtered;
+    });
+    
+    setDcInputs(prev => {
+      const filtered = prev.filter(s => {
+        if (s === '') return true;
+        const n = parseInt(s);
+        return !isNaN(n) && n <= maxAllowed;
+      });
+      if (filtered.length === 0 || filtered[filtered.length - 1] !== '') filtered.push('');
+      return filtered;
+    });
+  };
+
   const handleProblemParse = (detectedVars: 2 | 3 | 4 | 5 | 6 | null, mainTerms: number[], dontCares: number[], isPOS: boolean, naming: 'letters' | 'subscripts' | null) => {
     let finalVars = numVars;
     
@@ -303,7 +330,7 @@ function App() {
           currentNumVars={numVars} 
           varNames={varNames}
           onVarNameChange={handleVarNameChange}
-          onRequestNumVarsChange={setNumVars}
+          onRequestNumVarsChange={handleNumVarsChange}
           onParse={handleProblemParse} 
           funcName={funcName}
           setFuncName={setFuncName}
@@ -317,7 +344,7 @@ function App() {
 
         <ConfigBar
           numVars={numVars}
-          setNumVars={setNumVars}
+          setNumVars={handleNumVarsChange}
           namingMode={namingMode}
           setNamingMode={setNamingMode}
           canonicalMode={canonicalMode}

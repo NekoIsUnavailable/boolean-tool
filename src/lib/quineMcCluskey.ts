@@ -47,7 +47,9 @@ export function getQuineMcCluskeySteps(minterms: number[], dontCares: number[], 
   for (const m of allTerms) {
     const bin = m.toString(2).padStart(numVars, '0');
     const ones = (bin.match(/1/g) || []).length;
-    groups[ones].push({ term: bin, minterms: [m], used: false });
+    if (groups[ones]) {
+      groups[ones].push({ term: bin, minterms: [m], used: false });
+    }
   }
   
   const primeImplicants: Implicant[] = [];

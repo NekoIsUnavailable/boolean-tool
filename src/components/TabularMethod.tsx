@@ -10,9 +10,11 @@ interface TabularMethodProps {
 
 export const TabularMethod: React.FC<TabularMethodProps> = ({ numVars, mintermVector }) => {
   const steps = useMemo(() => {
+    const activeLength = Math.pow(2, numVars);
+    const activeVector = mintermVector.slice(0, activeLength);
     const minterms: number[] = [];
     const dontCares: number[] = [];
-    mintermVector.forEach((state, i) => {
+    activeVector.forEach((state, i) => {
       if (state === '1') minterms.push(i);
       else if (state === 'X') dontCares.push(i);
     });

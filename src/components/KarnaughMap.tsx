@@ -111,15 +111,15 @@ export const KarnaughMap: React.FC<KarnaughMapProps> = ({
 
   let cornerLabel = '';
   if (numVars === 2) {
-    cornerLabel = swapAxes ? `${vNames[1]} \\ ${vNames[0]}` : `${vNames[0]} \\ ${vNames[1]}`;
+    cornerLabel = swapAxes ? `${vNames[1] || ''} \\ ${vNames[0] || ''}` : `${vNames[0] || ''} \\ ${vNames[1] || ''}`;
   } else if (numVars === 3) {
-    cornerLabel = swapAxes ? `${vNames[1]}${vNames[2]} \\ ${vNames[0]}` : `${vNames[0]} \\ ${vNames[1]}${vNames[2]}`;
+    cornerLabel = swapAxes ? `${vNames[1] || ''}${vNames[2] || ''} \\ ${vNames[0] || ''}` : `${vNames[0] || ''} \\ ${vNames[1] || ''}${vNames[2] || ''}`;
   } else if (numVars === 4) {
-    cornerLabel = swapAxes ? `${vNames[2]}${vNames[3]} \\ ${vNames[0]}${vNames[1]}` : `${vNames[0]}${vNames[1]} \\ ${vNames[2]}${vNames[3]}`;
+    cornerLabel = swapAxes ? `${vNames[2] || ''}${vNames[3] || ''} \\ ${vNames[0] || ''}${vNames[1] || ''}` : `${vNames[0] || ''}${vNames[1] || ''} \\ ${vNames[2] || ''}${vNames[3] || ''}`;
   } else if (numVars === 5) {
-    cornerLabel = swapAxes ? `${vNames[1]}${vNames[2]} \\ ${vNames[3]}${vNames[4]}` : `${vNames[3]}${vNames[4]} \\ ${vNames[1]}${vNames[2]}`;
+    cornerLabel = swapAxes ? `${vNames[1] || ''}${vNames[2] || ''} \\ ${vNames[3] || ''}${vNames[4] || ''}` : `${vNames[3] || ''}${vNames[4] || ''} \\ ${vNames[1] || ''}${vNames[2] || ''}`;
   } else if (numVars === 6) {
-    cornerLabel = swapAxes ? `${vNames[2]}${vNames[3]} \\ ${vNames[4]}${vNames[5]}` : `${vNames[4]}${vNames[5]} \\ ${vNames[2]}${vNames[3]}`;
+    cornerLabel = swapAxes ? `${vNames[3] || ''}${vNames[4] || ''}${vNames[5] || ''} \\ ${vNames[0] || ''}${vNames[1] || ''}${vNames[2] || ''}` : `${vNames[0] || ''}${vNames[1] || ''}${vNames[2] || ''} \\ ${vNames[3] || ''}${vNames[4] || ''}${vNames[5] || ''}`;
   }
 
   const colBits = (numVars === 2 || (numVars === 3 && swapAxes)) ? 1 : 2;
@@ -192,7 +192,7 @@ export const KarnaughMap: React.FC<KarnaughMapProps> = ({
                     {innerRowLabels[rIdx % 4]}
                   </th>
                   {row.map((minterm, cIdx) => {
-                    const state = mintermVector[minterm];
+                    const state = mintermVector[minterm] || (canonicalMode === 'SOP' ? '0' : '1');
                     
                     const coveringPIs = primeImplicants
                       .map((pi, idx) => termCovers(pi, minterm, numVars) ? idx : -1)

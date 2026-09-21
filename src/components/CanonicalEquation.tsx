@@ -20,12 +20,13 @@ export function CanonicalEquation({
   const dcTerms: number[] = [];
 
   for (let i = 0; i < activeLength; i++) {
+    const val = mintermVector[i] || (canonicalMode === 'SOP' ? '0' : '1');
     if (canonicalMode === 'SOP') {
-      if (mintermVector[i] === '1') mainTerms.push(i);
-      else if (mintermVector[i] === 'X') dcTerms.push(i);
+      if (val === '1') mainTerms.push(i);
+      else if (val === 'X') dcTerms.push(i);
     } else {
-      if (mintermVector[i] === '0') mainTerms.push(i);
-      else if (mintermVector[i] === 'X') dcTerms.push(i);
+      if (val === '0') mainTerms.push(i);
+      else if (val === 'X') dcTerms.push(i);
     }
   }
 

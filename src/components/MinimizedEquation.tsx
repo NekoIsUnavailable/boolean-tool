@@ -38,7 +38,7 @@ export const MinimizedEquation: React.FC<MinimizedEquationProps> = ({
     
     term.split('').forEach((char, i) => {
       if (char === '-') return;
-      const vName = varNames[i];
+      const vName = varNames[i] || '';
       if (char === (isSOP ? '1' : '0')) {
         elements.push(<span key={i} className="text-blue-700 font-medium">{vName}</span>);
       } else {

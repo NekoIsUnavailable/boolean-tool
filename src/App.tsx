@@ -100,7 +100,7 @@ function App() {
     });
   };
 
-  const [mintermVector, setMintermVector] = useLocalStorage<OutputState[]>('mintermVector', Array(16).fill('0'));
+  const [mintermVector, setMintermVector] = useLocalStorage<OutputState[]>('mintermVector', Array(64).fill('0'));
   const [builderTerms, setBuilderTerms] = useLocalStorage<Term[]>('builderTerms', []);
   const [isBuilderDirty, setIsBuilderDirty] = useState(false);
   const [hoveredTermIndex, setHoveredTermIndex] = useState<number | null>(null);
@@ -256,10 +256,9 @@ function App() {
   // Adjust vector size if numVars changes
   useEffect(() => {
     setMintermVector(prev => {
-      const targetSize = Math.pow(2, numVars);
-      if (prev.length === targetSize) return prev;
+      if (prev.length === 64) return prev;
       const next = Array(64).fill(canonicalMode === 'SOP' ? '0' : '1');
-      for (let i = 0; i < Math.min(prev.length, targetSize); i++) {
+      for (let i = 0; i < Math.min(prev.length, 64); i++) {
         next[i] = prev[i];
       }
       return next;

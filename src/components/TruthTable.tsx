@@ -42,7 +42,8 @@ export const TruthTable: React.FC<TruthTableProps> = ({
           <tbody>
             {Array.from({ length: rows }).map((_, rowIndex) => {
               const bin = rowIndex.toString(2).padStart(numVars, '0');
-              const outState = mintermVector[rowIndex];
+              const outState = mintermVector[rowIndex] || (canonicalMode === 'SOP' ? '0' : '1');
+              
               return (
                 <tr key={rowIndex} className="border-b border-slate-100 hover:bg-slate-50 transition-colors">
                   <td className="px-4 py-2 font-mono text-slate-500">{rowIndex}</td>

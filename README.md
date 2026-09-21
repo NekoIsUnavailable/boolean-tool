@@ -13,7 +13,7 @@ A modern, beautiful, and mobile-friendly Boolean Logic Minimizer built with Reac
 * **History Tracking:** Automatically saves your recent problems locally.
 
 ## 🌐 Live Demo
-Try it live: [https://boolean67tung.vercel.app/](https://boolean67tung.vercel.app/)
+Try it live: [https://renebaterboolean.vercel.app/](https://renebaterboolean.vercel.app/)
 
 ## 🛠️ Tech Stack
 * React 19

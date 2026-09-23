@@ -119,7 +119,7 @@ export const KarnaughMap: React.FC<KarnaughMapProps> = ({
   } else if (numVars === 5) {
     cornerLabel = swapAxes ? `${vNames[1] || ''}${vNames[2] || ''} \\ ${vNames[3] || ''}${vNames[4] || ''}` : `${vNames[3] || ''}${vNames[4] || ''} \\ ${vNames[1] || ''}${vNames[2] || ''}`;
   } else if (numVars === 6) {
-    cornerLabel = swapAxes ? `${vNames[3] || ''}${vNames[4] || ''}${vNames[5] || ''} \\ ${vNames[0] || ''}${vNames[1] || ''}${vNames[2] || ''}` : `${vNames[0] || ''}${vNames[1] || ''}${vNames[2] || ''} \\ ${vNames[3] || ''}${vNames[4] || ''}${vNames[5] || ''}`;
+    cornerLabel = swapAxes ? `${vNames[2] || ''}${vNames[3] || ''} \\ ${vNames[4] || ''}${vNames[5] || ''}` : `${vNames[4] || ''}${vNames[5] || ''} \\ ${vNames[2] || ''}${vNames[3] || ''}`;
   }
 
   const colBits = (numVars === 2 || (numVars === 3 && swapAxes)) ? 1 : 2;

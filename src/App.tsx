@@ -321,7 +321,7 @@ function App() {
               {isDarkMode ? '☀️' : '🌙'}
             </button>
             <a 
-              href="https://github.com/NekoIsUnavailable/boolean-tool/releases/download/latest/app-debug.apk"
+              href="https://github.com/NekoIsUnavailable/boolean-tool/releases/download/latest/Rene-Baterboolean.apk"
               className="pill text-xs hidden sm:flex items-center"
             >
               <svg className="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
@@ -448,7 +448,7 @@ function App() {
         </div>
         
         <div className="text-center pt-8 pb-4 sm:hidden">
-          <a href="https://github.com/NekoIsUnavailable/boolean-tool/releases/download/latest/app-debug.apk" className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-indigo-600 text-white rounded-xl shadow-lg shadow-indigo-200 dark:shadow-none font-semibold">
+          <a href="https://github.com/NekoIsUnavailable/boolean-tool/releases/download/latest/Rene-Baterboolean.apk" className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-indigo-600 text-white rounded-xl shadow-lg shadow-indigo-200 dark:shadow-none font-semibold">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
             Download Android APK
           </a>

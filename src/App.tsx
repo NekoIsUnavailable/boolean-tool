@@ -308,8 +308,8 @@ function App() {
               <span className="text-white text-sm font-bold">R</span>
             </div>
             <div>
-              <h1 className="text-base sm:text-lg font-bold text-slate-800 dark:text-white leading-tight">Rene Baterboolean</h1>
-              <p className="text-[10px] sm:text-xs text-slate-400 font-medium -mt-0.5 hidden sm:block">Visual Logic Simplification</p>
+              <h1 className="text-base sm:text-lg font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 leading-tight">Rene Baterboolean</h1>
+              <p className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium -mt-0.5 hidden sm:block">Visual Logic Simplification</p>
             </div>
           </div>
           <div className="flex items-center gap-2">

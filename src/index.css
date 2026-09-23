@@ -175,6 +175,59 @@ button:active {
   padding: 1.5rem;
 }
 
+/* ── Dark Mode ───────────────────────────────── */
+.dark body {
+  background-color: #0f172a;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, hsla(240, 80%, 15%, 0.5), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 0%, hsla(260, 60%, 12%, 0.4), transparent);
+  color: #f8fafc;
+}
+
+.dark .card, .dark .modern-card {
+  background: #1e293b;
+  border-color: #334155;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.dark .card-glass {
+  background: rgba(30, 41, 59, 0.75);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark .pill {
+  background: #1e293b;
+  border-color: #334155;
+  color: #cbd5e1;
+}
+
+.dark .pill:hover {
+  border-color: #6366f1;
+  background: rgba(99, 102, 241, 0.15);
+  color: #a5b4fc;
+}
+
+.dark .pill-active {
+  background: #6366f1;
+  border-color: #6366f1;
+  color: #ffffff;
+}
+
+.dark .input-field {
+  background: #0f172a;
+  border-color: #334155;
+  color: #f8fafc;
+}
+
+.dark .input-field:focus {
+  background: #1e293b;
+  border-color: #818cf8;
+}
+
+.dark .section-title {
+  color: #64748b;
+}
+
 /* ── Mobile Optimisations ────────────────────── */
 @media (max-width: 640px) {
   .card, .modern-card, .card-glass {

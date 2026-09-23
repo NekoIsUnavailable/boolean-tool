@@ -60,7 +60,7 @@ export const TermBuilder: React.FC<TermBuilderProps> = ({
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold">Visual Equation Builder</h2>
         <div className="flex gap-2">
-          <button onClick={handleInvertAll} className="px-3 py-1.5 text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-md transition-colors">
+          <button onClick={handleInvertAll} className="px-3 py-1.5 text-sm font-medium text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/50 hover:bg-slate-200 rounded-md transition-colors">
             Invert All
           </button>
           <button onClick={handleClearAll} className="px-3 py-1.5 text-sm font-medium text-red-600 bg-red-50 hover:bg-red-100 rounded-md transition-colors">
@@ -77,12 +77,12 @@ export const TermBuilder: React.FC<TermBuilderProps> = ({
         {terms.map((term, tIdx) => (
           <React.Fragment key={tIdx}>
             {tIdx > 0 && (
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-slate-100 text-slate-500 font-bold">
+              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 font-bold">
                 {isSOP ? '+' : '\u00B7'}
               </div>
             )}
             
-            <div className="relative group flex p-2 bg-slate-50 border border-slate-200 rounded-lg gap-1.5 items-center pr-8">
+            <div className="relative group flex p-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg gap-1.5 items-center pr-8">
               {isSOP ? null : <span className="text-slate-400 font-light text-lg">(</span>}
               {term.map((state, vIdx) => {
                 const varName = varNames[vIdx];
@@ -92,7 +92,7 @@ export const TermBuilder: React.FC<TermBuilderProps> = ({
                     onClick={() => handleChipClick(tIdx, vIdx)}
                     className={cn(
                       "w-10 h-10 flex items-center justify-center rounded-md font-medium transition-all select-none relative",
-                      state === 'Omitted' ? "border-2 border-dashed border-slate-300 text-slate-400 bg-transparent hover:bg-slate-100" :
+                      state === 'Omitted' ? "border-2 border-dashed border-slate-300 text-slate-400 bg-transparent hover:bg-slate-100 dark:bg-slate-800/50" :
                       state === 'True' ? "bg-blue-500 text-white shadow-sm hover:bg-blue-600" :
                       "bg-amber-500 text-white shadow-sm hover:bg-amber-600"
                     )}

@@ -25,7 +25,7 @@ export const TabularMethod: React.FC<TabularMethodProps> = ({ numVars, mintermVe
     return (
       <div className="modern-card p-6">
         <h2 className="text-lg font-semibold mb-4">Quine-McCluskey Tabular Method</h2>
-        <p className="text-slate-500">No minterms to process.</p>
+        <p className="text-slate-500 dark:text-slate-400">No minterms to process.</p>
       </div>
     );
   }
@@ -53,13 +53,13 @@ export const TabularMethod: React.FC<TabularMethodProps> = ({ numVars, mintermVe
           
           return (
             <div key={idx} className="min-w-fit flex flex-col border border-slate-300">
-              <div className="bg-slate-100 font-semibold p-2 border-b border-slate-300 text-center">
+              <div className="bg-slate-100 dark:bg-slate-800/50 font-semibold p-2 border-b border-slate-300 text-center">
                 {step.cubes}-CUBES
               </div>
               <div className="flex">
-                <div className="p-2 border-r border-slate-300 font-semibold bg-slate-50 w-12 text-center"># 1s</div>
-                <div className="p-2 border-r border-slate-300 font-semibold bg-slate-50 min-w-[12rem]">Minterms (Diffs)</div>
-                <div className="p-2 font-semibold bg-slate-50 w-24">Binary</div>
+                <div className="p-2 border-r border-slate-300 font-semibold bg-slate-50 dark:bg-slate-900 w-12 text-center"># 1s</div>
+                <div className="p-2 border-r border-slate-300 font-semibold bg-slate-50 dark:bg-slate-900 min-w-[12rem]">Minterms (Diffs)</div>
+                <div className="p-2 font-semibold bg-slate-50 dark:bg-slate-900 w-24">Binary</div>
               </div>
               
               {step.groups.map((group, gIdx) => {
@@ -67,9 +67,9 @@ export const TabularMethod: React.FC<TabularMethodProps> = ({ numVars, mintermVe
                 return (
                   <React.Fragment key={gIdx}>
                     {group.map((term, tIdx) => (
-                      <div key={tIdx} className={`flex border-t border-slate-200 ${term.used ? 'text-slate-700' : 'font-semibold text-blue-700 bg-blue-50/30'}`}>
+                      <div key={tIdx} className={`flex border-t border-slate-200 dark:border-slate-700 ${term.used ? 'text-slate-700 dark:text-slate-300' : 'font-semibold text-blue-700 bg-blue-50/30'}`}>
                         {tIdx === 0 ? (
-                          <div className="p-2 border-r border-slate-300 w-12 text-center font-semibold text-slate-600 flex items-center justify-center">
+                          <div className="p-2 border-r border-slate-300 w-12 text-center font-semibold text-slate-600 dark:text-slate-400 flex items-center justify-center">
                             {gIdx}
                           </div>
                         ) : (
@@ -109,7 +109,7 @@ export const TabularMethod: React.FC<TabularMethodProps> = ({ numVars, mintermVe
           <h3 className="font-semibold mb-3">Prime Implicant Chart</h3>
           <table className="border-collapse border border-slate-300 text-sm w-full max-w-4xl">
             <thead>
-              <tr className="bg-slate-100">
+              <tr className="bg-slate-100 dark:bg-slate-800/50">
                 <th className="border border-slate-300 p-2 text-left w-12">P.I.</th>
                 <th className="border border-slate-300 p-2 text-left">Minterms</th>
                 {steps.piChart.map(m => (
@@ -135,7 +135,7 @@ export const TabularMethod: React.FC<TabularMethodProps> = ({ numVars, mintermVe
                         <td key={m.minterm} className="border border-slate-300 p-2 text-center">
                           {covers && (
                             <div className="flex justify-center">
-                              <svg className={`w-4 h-4 ${isEssential ? "text-blue-600" : "text-slate-600"}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
+                              <svg className={`w-4 h-4 ${isEssential ? "text-blue-600" : "text-slate-600 dark:text-slate-400"}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
                             </div>
                           )}
                         </td>
@@ -146,7 +146,7 @@ export const TabularMethod: React.FC<TabularMethodProps> = ({ numVars, mintermVe
               })}
             </tbody>
           </table>
-          <div className="mt-4 text-sm text-slate-600 flex flex-col gap-1">
+          <div className="mt-4 text-sm text-slate-600 dark:text-slate-400 flex flex-col gap-1">
             <p><span className="text-red-500 font-bold">*</span> Indicates an Essential Prime Implicant.</p>
             <p><span className="font-bold text-red-500">*PI</span> in the tables indicates an uncombined term (a Prime Implicant).</p>
             <p className="flex items-center gap-1">

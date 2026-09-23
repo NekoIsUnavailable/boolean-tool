@@ -82,7 +82,7 @@ export const LogicGateSchematic: React.FC<LogicGateSchematicProps> = ({
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-lg font-semibold">Logic Gate Schematic</h2>
         <div className="flex gap-2">
-          <button onClick={handleCopyEquation} className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-md transition-colors">
+          <button onClick={handleCopyEquation} className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/50 hover:bg-slate-200 rounded-md transition-colors">
             <Copy size={16} /> Copy Eq
           </button>
           <button onClick={handleExportSVG} className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-md transition-colors">
@@ -91,7 +91,7 @@ export const LogicGateSchematic: React.FC<LogicGateSchematicProps> = ({
         </div>
       </div>
 
-      <div className="overflow-x-auto border border-slate-100 rounded-lg bg-slate-50">
+      <div className="overflow-x-auto border border-slate-100 rounded-lg bg-slate-50 dark:bg-slate-900">
         <svg ref={svgRef} width={totalWidth} height={totalHeight} className="min-w-full" viewBox={`0 0 ${totalWidth} ${totalHeight}`}>
           <defs>
             <g id="and-gate">

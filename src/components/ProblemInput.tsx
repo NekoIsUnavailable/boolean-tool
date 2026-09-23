@@ -113,7 +113,7 @@ export const ProblemInput: React.FC<ProblemInputProps> = ({
           }}
           className={cn(
             "w-10 text-center bg-white border rounded focus:ring-2 focus:ring-indigo-500 outline-none p-1 shadow-sm transition-all",
-            val === '' ? "border-dashed border-slate-300 bg-slate-50/50" : "border-slate-300 font-semibold text-slate-700"
+            val === '' ? "border-dashed border-slate-300 bg-slate-50 dark:bg-slate-900/50" : "border-slate-300 font-semibold text-slate-700 dark:text-slate-300"
           )}
         />
         {i < inputs.length - 1 && <span className="text-slate-400 font-normal">,</span>}
@@ -137,7 +137,7 @@ export const ProblemInput: React.FC<ProblemInputProps> = ({
         </button>
       </div>
       
-      <div className="flex flex-wrap items-center gap-x-2 gap-y-4 font-mono text-[1.1rem] md:text-xl text-slate-800">
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-4 font-mono text-[1.1rem] md:text-xl text-slate-800 dark:text-slate-200">
         <input 
           type="text" 
           value={funcName}
@@ -168,7 +168,7 @@ export const ProblemInput: React.FC<ProblemInputProps> = ({
             <span className="text-slate-400">,</span>
             <button 
               onClick={() => onRequestNumVarsChange((currentNumVars + 1) as any)}
-              className="w-8 h-9 flex items-center justify-center text-slate-400 bg-slate-50 border border-dashed border-slate-300 rounded hover:border-indigo-400 hover:text-indigo-500 hover:bg-indigo-50 transition-colors"
+              className="w-8 h-9 flex items-center justify-center text-slate-400 bg-slate-50 dark:bg-slate-900 border border-dashed border-slate-300 rounded hover:border-indigo-400 hover:text-indigo-500 hover:bg-indigo-50 transition-colors"
               title="Add Variable"
             >
               <Plus size={16} />
@@ -189,13 +189,13 @@ export const ProblemInput: React.FC<ProblemInputProps> = ({
         </select>
         
         <span>(</span>
-        <div className="flex flex-wrap items-center gap-1 bg-slate-50 border border-slate-200 rounded-lg p-2 shadow-inner min-h-[46px]">
+        <div className="flex flex-wrap items-center gap-1 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg p-2 shadow-inner min-h-[46px]">
           {renderInputBoxes(mainTermInputs, setMainTermInputs)}
         </div>
         <span>)</span>
         
         <span className="mx-2">+ d (</span>
-        <div className="flex flex-wrap items-center gap-1 bg-slate-50 border border-slate-200 rounded-lg p-2 shadow-inner min-h-[46px]">
+        <div className="flex flex-wrap items-center gap-1 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg p-2 shadow-inner min-h-[46px]">
           {renderInputBoxes(dcInputs, setDcInputs)}
         </div>
         <span>)</span>

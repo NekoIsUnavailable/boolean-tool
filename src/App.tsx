@@ -280,33 +280,53 @@ function App() {
     });
   };
 
-  // Adjust vector size if numVars changes
+  const [isDarkMode, setIsDarkMode] = useLocalStorage('darkMode', false);
+
   useEffect(() => {
-    setMintermVector(prev => {
-      if (prev.length === 64) return prev;
-      const next = Array(64).fill(canonicalMode === 'SOP' ? '0' : '1');
-      for (let i = 0; i < Math.min(prev.length, 64); i++) {
-        next[i] = prev[i];
-      }
-      return next;
-    });
-  }, [numVars, canonicalMode]);
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDarkMode]);
 
   return (
-    <div className="min-h-screen pb-12">
+    <div className="min-h-screen pb-12 transition-colors duration-300">
+      <HistoryPanel 
+        isOpen={isHistoryOpen} 
+        onClose={() => setIsHistoryOpen(false)} 
+        history={history}
+        onLoad={handleLoadHistory}
+        onClear={() => setHistory([])}
+      />
+
       {/* ── Sticky Header ─────────────────────────── */}
-      <header className="sticky top-0 z-40 card-glass border-b border-white/40">
+      <header className="sticky top-0 z-40 card-glass border-b border-white/40 dark:border-white/10 transition-colors duration-300">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-sm">
               <span className="text-white text-sm font-bold">R</span>
             </div>
             <div>
-              <h1 className="text-base sm:text-lg font-bold text-slate-800 leading-tight">Rene Baterboolean</h1>
+              <h1 className="text-base sm:text-lg font-bold text-slate-800 dark:text-white leading-tight">Rene Baterboolean</h1>
               <p className="text-[10px] sm:text-xs text-slate-400 font-medium -mt-0.5 hidden sm:block">Visual Logic Simplification</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
+            <button 
+              onClick={() => setIsDarkMode(!isDarkMode)}
+              className="pill text-xs px-2 sm:px-3"
+              aria-label="Toggle Dark Mode"
+            >
+              {isDarkMode ? '☀️' : '🌙'}
+            </button>
+            <a 
+              href="https://github.com/NekoIsUnavailable/boolean-tool/releases/download/latest/app-debug.apk"
+              className="pill text-xs hidden sm:flex items-center"
+            >
+              <svg className="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+              Get APK
+            </a>
             {isInstallable && (
               <button 
                 onClick={handleInstallClick}
@@ -329,16 +349,6 @@ function App() {
         
       {/* ── Main Content ──────────────────────────── */}
       <main className="max-w-5xl mx-auto px-3 sm:px-6 pt-5 sm:pt-8 space-y-4 sm:space-y-6">
-
-        <div className="animate-section">
-          <HistoryPanel 
-            isOpen={isHistoryOpen} 
-            onClose={() => setIsHistoryOpen(false)} 
-            history={history}
-            onLoad={handleLoadHistory}
-            onClear={() => setHistory([])}
-          />
-        </div>
 
         <div className="animate-section">
           <ProblemInput 
@@ -435,6 +445,13 @@ function App() {
             primeImplicants={primeImplicants}
             funcName={funcName}
           />
+        </div>
+        
+        <div className="text-center pt-8 pb-4 sm:hidden">
+          <a href="https://github.com/NekoIsUnavailable/boolean-tool/releases/download/latest/app-debug.apk" className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-indigo-600 text-white rounded-xl shadow-lg shadow-indigo-200 dark:shadow-none font-semibold">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            Download Android APK
+          </a>
         </div>
 
       </main>

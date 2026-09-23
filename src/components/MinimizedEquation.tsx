@@ -56,7 +56,7 @@ export const MinimizedEquation: React.FC<MinimizedEquationProps> = ({
     if (elements.length === 0) return null;
     if (!isSOP && elements.length > 1) {
       return (
-        <span className="text-slate-800">
+        <span className="text-slate-800 dark:text-slate-200">
           <span className="text-slate-400 font-light mr-0.5">(</span>
           {elements.map((el, i) => (
             <React.Fragment key={i}>
@@ -68,7 +68,7 @@ export const MinimizedEquation: React.FC<MinimizedEquationProps> = ({
         </span>
       );
     }
-    return <span className="text-slate-800">{elements}</span>;
+    return <span className="text-slate-800 dark:text-slate-200">{elements}</span>;
   };
 
   if (primeImplicants.length === 0) {
@@ -85,7 +85,7 @@ export const MinimizedEquation: React.FC<MinimizedEquationProps> = ({
       <h2 className="text-lg font-semibold mb-4">Minimized Output</h2>
       
       <div className="flex flex-wrap items-center gap-2 text-2xl font-serif mb-6">
-        <span className="font-sans font-bold text-slate-700 mr-2">{funcName} =</span>
+        <span className="font-sans font-bold text-slate-700 dark:text-slate-300 mr-2">{funcName} =</span>
         {primeImplicants.map((pi, idx) => (
           <React.Fragment key={idx}>
             {idx > 0 && <span className="text-slate-400 font-sans mx-1">{canonicalMode === 'SOP' ? '+' : '\u00B7'}</span>}
@@ -101,7 +101,7 @@ export const MinimizedEquation: React.FC<MinimizedEquationProps> = ({
       </div>
       
       <div className="mt-4 pt-4 border-t border-slate-100">
-        <h3 className="text-sm font-semibold text-slate-500 mb-3 uppercase tracking-wider">Legend</h3>
+        <h3 className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-3 uppercase tracking-wider">Legend</h3>
         <div className="flex flex-wrap gap-2">
           {primeImplicants.map((pi, idx) => {
             const count = pi.split('').filter(c => c === '-').length;

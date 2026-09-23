@@ -34,8 +34,8 @@ export function CanonicalEquation({
   
   return (
     <div className="modern-card">
-      <div className="px-5 py-3 border-b border-slate-100 bg-slate-50 flex justify-between items-center">
-        <h3 className="font-semibold text-slate-800 flex items-center gap-2">
+      <div className="px-5 py-3 border-b border-slate-100 bg-slate-50 dark:bg-slate-900 flex justify-between items-center">
+        <h3 className="font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-2">
           Complete Equation
         </h3>
       </div>

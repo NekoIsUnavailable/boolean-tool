@@ -22,15 +22,15 @@ export const HistoryPanel: React.FC<HistoryPanelProps> = ({ isOpen, onClose, his
       />
       
       {/* Panel */}
-      <div className="fixed top-0 right-0 h-full w-full max-w-sm bg-white shadow-2xl z-50 flex flex-col transform transition-transform duration-300">
-        <div className="flex items-center justify-between p-4 border-b border-slate-100 bg-slate-50">
-          <div className="flex items-center gap-2 text-slate-800 font-semibold">
+      <div className="fixed top-0 right-0 h-full w-full max-w-sm bg-white dark:bg-slate-800 shadow-2xl z-50 flex flex-col transform transition-transform duration-300">
+        <div className="flex items-center justify-between p-4 border-b border-slate-100 bg-slate-50 dark:bg-slate-900">
+          <div className="flex items-center gap-2 text-slate-800 dark:text-slate-100 font-semibold">
             <Clock size={18} className="text-indigo-600" />
             <h2>Solving History</h2>
           </div>
           <button 
             onClick={onClose}
-            className="p-2 hover:bg-slate-200 rounded-full text-slate-500 transition-colors"
+            className="p-2 hover:bg-slate-200 dark:hover:bg-slate-700 dark:bg-slate-700 rounded-full text-slate-500 dark:text-slate-400 transition-colors"
           >
             <X size={18} />
           </button>
@@ -51,17 +51,17 @@ export const HistoryPanel: React.FC<HistoryPanelProps> = ({ isOpen, onClose, his
                   onLoad(item);
                   onClose();
                 }}
-                className="group p-3 border border-slate-200 rounded-lg hover:border-indigo-400 hover:shadow-sm cursor-pointer transition-all bg-white"
+                className="group p-3 border border-slate-200 dark:border-slate-700 rounded-lg hover:border-indigo-400 hover:shadow-sm cursor-pointer transition-all bg-white dark:bg-slate-800"
               >
                 <div className="flex justify-between items-start mb-2">
-                  <div className="font-mono text-sm font-bold text-slate-700">
+                  <div className="font-mono text-sm font-bold text-slate-700 dark:text-slate-200">
                     {item.funcName}({item.varNames.join(', ')})
                   </div>
                   <div className="text-xs text-slate-400">
                     {new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </div>
                 </div>
-                <div className="font-mono text-xs text-slate-500 line-clamp-2">
+                <div className="font-mono text-xs text-slate-500 dark:text-slate-400 line-clamp-2">
                   <span className="text-indigo-500 font-semibold">{item.canonicalMode === 'SOP' ? 'Σm' : 'ΠM'}</span>
                   ({item.mainTermInputs.join(',')})
                   {item.dcInputs.some(v => v !== '') && (

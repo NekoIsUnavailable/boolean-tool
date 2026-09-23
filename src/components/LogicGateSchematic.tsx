@@ -57,7 +57,7 @@ export const LogicGateSchematic: React.FC<LogicGateSchematicProps> = ({
 
   if (primeImplicants.length === 0) {
     return (
-      <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+      <div className="modern-card p-6">
         <h2 className="text-lg font-semibold mb-4">Logic Gate Schematic</h2>
         <div className="h-40 flex items-center justify-center text-slate-400">
           Output is always 0 (No gates needed)
@@ -68,7 +68,7 @@ export const LogicGateSchematic: React.FC<LogicGateSchematicProps> = ({
 
   if (primeImplicants.length === 1 && !primeImplicants[0].includes('0') && !primeImplicants[0].includes('1')) {
     return (
-      <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+      <div className="modern-card p-6">
         <h2 className="text-lg font-semibold mb-4">Logic Gate Schematic</h2>
         <div className="h-40 flex items-center justify-center text-slate-400">
           Output is always 1 (Direct to VCC)
@@ -78,7 +78,7 @@ export const LogicGateSchematic: React.FC<LogicGateSchematicProps> = ({
   }
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+    <div className="modern-card p-6">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-lg font-semibold">Logic Gate Schematic</h2>
         <div className="flex gap-2">

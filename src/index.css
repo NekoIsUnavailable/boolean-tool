@@ -6,16 +6,26 @@
 }
 
 body {
-  background-color: #f8fafc;
+  background-color: #f3f4f6;
+  background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+  background-attachment: fixed;
   color: #0f172a;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding-bottom: env(safe-area-inset-bottom); /* iOS safe area */
+  padding-top: env(safe-area-inset-top);
+}
+
+/* Override background gradient with a lighter more modern one */
+body {
+  background-color: #f8fafc;
+  background-image: radial-gradient(at 0% 0%, hsla(210, 100%, 98%, 1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(220, 100%, 96%, 1) 0, transparent 50%);
 }
 
 /* Elegant Scrollbars for Data Containers */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -25,7 +35,6 @@ body {
 ::-webkit-scrollbar-thumb {
   background-color: #cbd5e1; 
   border-radius: 10px;
-  border: 2px solid #f8fafc; /* Adds padding feel inside the container */
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -41,7 +50,16 @@ body {
 
 /* Soft drop shadows for cards to feel elevated and modern */
 .card-shadow {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+}
+
+.modern-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
 }
 
 /* Beautiful transitions for interactive elements */

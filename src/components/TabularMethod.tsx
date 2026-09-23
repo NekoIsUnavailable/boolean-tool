@@ -23,7 +23,7 @@ export const TabularMethod: React.FC<TabularMethodProps> = ({ numVars, mintermVe
 
   if (steps.stepTables.length === 0) {
     return (
-      <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+      <div className="modern-card p-6">
         <h2 className="text-lg font-semibold mb-4">Quine-McCluskey Tabular Method</h2>
         <p className="text-slate-500">No minterms to process.</p>
       </div>
@@ -42,7 +42,7 @@ export const TabularMethod: React.FC<TabularMethodProps> = ({ numVars, mintermVe
   };
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+    <div className="modern-card p-6 overflow-hidden">
       <h2 className="text-lg font-semibold mb-6">Quine-McCluskey Tabular Method</h2>
       
       {/* Implicant Generation Tables */}

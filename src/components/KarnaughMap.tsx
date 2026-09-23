@@ -129,7 +129,7 @@ export const KarnaughMap: React.FC<KarnaughMapProps> = ({
   const innerRowLabels = rowBits === 1 ? ['0', '1'] : ['00', '01', '11', '10'];
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+    <div className="modern-card p-6">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-lg font-semibold">Karnaugh Map</h2>
         <button 

@@ -15,7 +15,7 @@ export const ConfigBar: React.FC<ConfigBarProps> = ({
   canonicalMode, setCanonicalMode
 }) => {
   return (
-    <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-wrap gap-6 items-center justify-between">
+    <div className="modern-card p-4 flex flex-wrap gap-6 items-center justify-between">
       <div className="flex items-center gap-3">
         <label className="text-sm font-semibold text-slate-700">Variables:</label>
         <div className="flex bg-slate-100 p-1 rounded-lg">

@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
+import { motion } from 'framer-motion';
 import { ConfigBar } from './components/ConfigBar';
 import { ProblemInput } from './components/ProblemInput';
 import { TermBuilder } from './components/TermBuilder';
@@ -295,7 +296,7 @@ function App() {
   return (
     <div className="min-h-screen bg-slate-50 p-3 sm:p-6 md:p-8 font-sans text-slate-900 selection:bg-indigo-100 selection:text-indigo-900">
       <div className="max-w-6xl mx-auto space-y-6 sm:space-y-8">
-        <header className="mb-6 sm:mb-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-200/60">
+        <header className="mb-6 sm:mb-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 modern-card">
           <div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500 tracking-tight">Rene Baterboolean</h1>
             <p className="text-slate-500 mt-1 font-medium">Visual Logic Simplification</p>
@@ -311,7 +312,7 @@ function App() {
             )}
             <button 
               onClick={() => setIsHistoryOpen(true)}
-              className="flex-1 sm:flex-none flex justify-center items-center gap-2 px-5 py-2.5 bg-white text-slate-700 font-semibold rounded-xl shadow-sm border border-slate-200 hover:bg-slate-50 hover:border-slate-300 hover:-translate-y-0.5 transition-all active:scale-95"
+              className="flex-1 sm:flex-none flex justify-center items-center gap-2 px-5 py-2.5 modern-card hover:bg-slate-50 hover:border-slate-300 hover:-translate-y-0.5 transition-all active:scale-95"
             >
               History
             </button>
@@ -359,17 +360,17 @@ function App() {
           onChange={handleBuilderChange}
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="space-y-6">
+        <motion.div layout className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <motion.div layout className="space-y-6">
             <TruthTable
               numVars={numVars}
               varNames={varNames}
               mintermVector={mintermVector}
               onChange={handleMintermChange}
             />
-          </div>
+          </motion.div>
           
-          <div className="space-y-6">
+          <motion.div layout className="space-y-6">
             <CanonicalEquation
               numVars={numVars}
               varNames={varNames}
@@ -396,8 +397,8 @@ function App() {
               setHoveredTermIndex={setHoveredTermIndex}
               funcName={funcName}
             />
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         <TabularMethod
           numVars={numVars}

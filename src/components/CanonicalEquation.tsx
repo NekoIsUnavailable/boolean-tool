@@ -33,7 +33,7 @@ export function CanonicalEquation({
   const varList = varNames.slice(0, numVars).join(', ');
   
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-slate-200">
+    <div className="modern-card">
       <div className="px-5 py-3 border-b border-slate-100 bg-slate-50 flex justify-between items-center">
         <h3 className="font-semibold text-slate-800 flex items-center gap-2">
           Complete Equation

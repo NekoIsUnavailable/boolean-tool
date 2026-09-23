@@ -73,7 +73,7 @@ export const MinimizedEquation: React.FC<MinimizedEquationProps> = ({
 
   if (primeImplicants.length === 0) {
     return (
-      <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+      <div className="modern-card p-6">
         <h2 className="text-lg font-semibold mb-4">Minimized Output</h2>
         <div className="text-2xl font-serif text-slate-400">{canonicalMode === 'SOP' ? '0' : '1'}</div>
       </div>
@@ -81,7 +81,7 @@ export const MinimizedEquation: React.FC<MinimizedEquationProps> = ({
   }
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+    <div className="modern-card p-6">
       <h2 className="text-lg font-semibold mb-4">Minimized Output</h2>
       
       <div className="flex flex-wrap items-center gap-2 text-2xl font-serif mb-6">

@@ -24,7 +24,7 @@ export const TruthTable: React.FC<TruthTableProps> = ({
   const rows = Math.pow(2, numVars);
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+    <div className="modern-card p-6">
       <h2 className="text-lg font-semibold mb-4">Truth Table</h2>
       <div className="overflow-x-auto max-h-[400px] overflow-y-auto">
         <table className="w-full text-sm text-left">

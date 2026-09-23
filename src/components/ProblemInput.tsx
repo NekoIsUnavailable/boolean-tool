@@ -122,7 +122,7 @@ export const ProblemInput: React.FC<ProblemInputProps> = ({
   };
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-6 bg-gradient-to-br from-white to-indigo-50/50">
+    <div className="modern-card p-6 mb-6 bg-gradient-to-br from-white to-indigo-50/50">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
         <div className="flex items-center gap-2">
           <TerminalSquare size={20} className="text-indigo-500" />

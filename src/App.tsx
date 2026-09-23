@@ -1,5 +1,4 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
-import { motion } from 'framer-motion';
 import { ConfigBar } from './components/ConfigBar';
 import { ProblemInput } from './components/ProblemInput';
 import { TermBuilder } from './components/TermBuilder';
@@ -294,83 +293,103 @@ function App() {
   }, [numVars, canonicalMode]);
 
   return (
-    <div className="min-h-screen bg-slate-50 p-3 sm:p-6 md:p-8 font-sans text-slate-900 selection:bg-indigo-100 selection:text-indigo-900">
-      <div className="max-w-6xl mx-auto space-y-6 sm:space-y-8">
-        <header className="mb-6 sm:mb-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 modern-card">
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500 tracking-tight">Rene Baterboolean</h1>
-            <p className="text-slate-500 mt-1 font-medium">Visual Logic Simplification</p>
+    <div className="min-h-screen pb-12">
+      {/* ── Sticky Header ─────────────────────────── */}
+      <header className="sticky top-0 z-40 card-glass border-b border-white/40">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-sm">
+              <span className="text-white text-sm font-bold">R</span>
+            </div>
+            <div>
+              <h1 className="text-base sm:text-lg font-bold text-slate-800 leading-tight">Rene Baterboolean</h1>
+              <p className="text-[10px] sm:text-xs text-slate-400 font-medium -mt-0.5 hidden sm:block">Visual Logic Simplification</p>
+            </div>
           </div>
-          <div className="flex gap-3 w-full sm:w-auto">
+          <div className="flex items-center gap-2">
             {isInstallable && (
               <button 
                 onClick={handleInstallClick}
-                className="flex-1 sm:flex-none flex justify-center items-center gap-2 px-5 py-2.5 bg-indigo-600 text-white font-semibold rounded-xl shadow-md shadow-indigo-200 hover:bg-indigo-700 hover:-translate-y-0.5 transition-all active:scale-95"
+                className="pill pill-active text-xs"
               >
-                Install App
+                <svg className="w-3.5 h-3.5 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                Install
               </button>
             )}
             <button 
               onClick={() => setIsHistoryOpen(true)}
-              className="flex-1 sm:flex-none flex justify-center items-center gap-2 px-5 py-2.5 modern-card hover:bg-slate-50 hover:border-slate-300 hover:-translate-y-0.5 transition-all active:scale-95"
+              className="pill text-xs"
             >
-              History
+              <svg className="w-3.5 h-3.5 mr-1 sm:mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              <span className="hidden sm:inline">History</span>
             </button>
           </div>
-        </header>
+        </div>
+      </header>
+        
+      {/* ── Main Content ──────────────────────────── */}
+      <main className="max-w-5xl mx-auto px-3 sm:px-6 pt-5 sm:pt-8 space-y-4 sm:space-y-6">
 
-        <HistoryPanel 
-          isOpen={isHistoryOpen} 
-          onClose={() => setIsHistoryOpen(false)} 
-          history={history}
-          onLoad={handleLoadHistory}
-          onClear={() => setHistory([])}
-        />
+        <div className="animate-section">
+          <HistoryPanel 
+            isOpen={isHistoryOpen} 
+            onClose={() => setIsHistoryOpen(false)} 
+            history={history}
+            onLoad={handleLoadHistory}
+            onClear={() => setHistory([])}
+          />
+        </div>
 
-        <ProblemInput 
-          currentNumVars={numVars} 
-          varNames={varNames}
-          onVarNameChange={handleVarNameChange}
-          onRequestNumVarsChange={handleNumVarsChange}
-          onParse={handleProblemParse} 
-          funcName={funcName}
-          setFuncName={setFuncName}
-          mainTermInputs={mainTermInputs}
-          setMainTermInputs={setMainTermInputs}
-          dcInputs={dcInputs}
-          setDcInputs={setDcInputs}
-          isPOS={isPOS}
-          setIsPOS={setIsPOS}
-        />
+        <div className="animate-section">
+          <ProblemInput 
+            currentNumVars={numVars} 
+            varNames={varNames}
+            onVarNameChange={handleVarNameChange}
+            onRequestNumVarsChange={handleNumVarsChange}
+            onParse={handleProblemParse} 
+            funcName={funcName}
+            setFuncName={setFuncName}
+            mainTermInputs={mainTermInputs}
+            setMainTermInputs={setMainTermInputs}
+            dcInputs={dcInputs}
+            setDcInputs={setDcInputs}
+            isPOS={isPOS}
+            setIsPOS={setIsPOS}
+          />
+        </div>
 
-        <ConfigBar
-          numVars={numVars}
-          setNumVars={handleNumVarsChange}
-          namingMode={namingMode}
-          setNamingMode={setNamingMode}
-          canonicalMode={canonicalMode}
-          setCanonicalMode={setCanonicalMode}
-        />
+        <div className="animate-section">
+          <ConfigBar
+            numVars={numVars}
+            setNumVars={handleNumVarsChange}
+            namingMode={namingMode}
+            setNamingMode={setNamingMode}
+            canonicalMode={canonicalMode}
+            setCanonicalMode={setCanonicalMode}
+          />
+        </div>
 
-        <TermBuilder
-          terms={builderTerms}
-          numVars={numVars}
-          varNames={varNames}
-          canonicalMode={canonicalMode}
-          onChange={handleBuilderChange}
-        />
+        <div className="animate-section">
+          <TermBuilder
+            terms={builderTerms}
+            numVars={numVars}
+            varNames={varNames}
+            canonicalMode={canonicalMode}
+            onChange={handleBuilderChange}
+          />
+        </div>
 
-        <motion.div layout className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <motion.div layout className="space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+          <div className="space-y-4 sm:space-y-6 animate-section">
             <TruthTable
               numVars={numVars}
               varNames={varNames}
               mintermVector={mintermVector}
               onChange={handleMintermChange}
             />
-          </motion.div>
+          </div>
           
-          <motion.div layout className="space-y-6">
+          <div className="space-y-4 sm:space-y-6 animate-section">
             <CanonicalEquation
               numVars={numVars}
               varNames={varNames}
@@ -397,24 +416,28 @@ function App() {
               setHoveredTermIndex={setHoveredTermIndex}
               funcName={funcName}
             />
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
-        <TabularMethod
-          numVars={numVars}
-          varNames={varNames}
-          mintermVector={mintermVector}
-        />
+        <div className="animate-section">
+          <TabularMethod
+            numVars={numVars}
+            varNames={varNames}
+            mintermVector={mintermVector}
+          />
+        </div>
 
-        <LogicGateSchematic
-          numVars={numVars}
-          varNames={varNames}
-          canonicalMode={canonicalMode}
-          primeImplicants={primeImplicants}
-          funcName={funcName}
-        />
+        <div className="animate-section">
+          <LogicGateSchematic
+            numVars={numVars}
+            varNames={varNames}
+            canonicalMode={canonicalMode}
+            primeImplicants={primeImplicants}
+            funcName={funcName}
+          />
+        </div>
 
-      </div>
+      </main>
     </div>
   );
 }
